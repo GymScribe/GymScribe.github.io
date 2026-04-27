@@ -1,1303 +1,526 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>GymNote — Marketer</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0c0c0c;
-      --s1: #161616;
-      --s2: #1e1e1e;
-      --s3: #262626;
-      --b1: #2a2a2a;
-      --b2: #363636;
-      --tx: #efefef;
-      --muted: #777;
-      --dim: #444;
-      --acc: #c8f135;
-      --acc-bg: rgba(200, 241, 53, .07);
-      --acc-br: rgba(200, 241, 53, .18);
-      --ok: #4caf7d;
-      --warn: #f5a623;
-      --info: #5b9cf6;
-      --danger: #ff5c5c;
-      --r: 12px;
-      --rs: 8px;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--tx);
-      min-height: 100vh;
-      font-size: 14px;
-      line-height: 1.5
-    }
-
-    /* LOGIN */
-    #login-screen {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px
-    }
-
-    .login-box {
-      background: var(--s1);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 36px;
-      width: 100%;
-      max-width: 380px
-    }
-
-    .login-logo {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 28px
-    }
-
-    .lm {
-      width: 32px;
-      height: 32px;
-      background: var(--acc);
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 14px;
-      color: #0c0c0c
-    }
-
-    .login-title {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -.4px;
-      margin-bottom: 6px
-    }
-
-    .login-sub {
-      font-size: 12.5px;
-      color: var(--muted);
-      margin-bottom: 24px
-    }
-
-    .field {
-      margin-bottom: 14px
-    }
-
-    .fl {
-      display: block;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      margin-bottom: 5px
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 9px 11px;
-      background: var(--s2);
-      border: 1px solid var(--b1);
-      border-radius: var(--rs);
-      color: var(--tx);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13.5px;
-      outline: none;
-      transition: border-color .12s
-    }
-
-    input:focus,
-    select:focus {
-      border-color: var(--acc-br)
-    }
-
-    input::placeholder {
-      color: var(--dim)
-    }
-
-    .pbtn {
-      width: 100%;
-      padding: 11px;
-      background: var(--acc);
-      color: #0c0c0c;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      border: none;
-      border-radius: var(--rs);
-      cursor: pointer;
-      transition: background .12s;
-      margin-top: 4px
-    }
-
-    .pbtn:hover {
-      background: #b5d92e
-    }
-
-    .pbtn:disabled {
-      opacity: .5;
-      cursor: not-allowed
-    }
-
-    .err {
-      font-size: 12.5px;
-      color: var(--danger);
-      margin-top: 10px;
-      text-align: center;
-      min-height: 18px
-    }
-
-    /* APP */
-    #app {
-      display: none
-    }
-
-    .shell {
-      display: flex;
-      min-height: 100vh
-    }
-
-    .sidebar {
-      width: 216px;
-      position: fixed;
-      inset: 0 auto 0 0;
-      background: var(--s1);
-      border-right: 1px solid var(--b1);
-      display: flex;
-      flex-direction: column;
-      padding: 20px 10px 18px;
-      z-index: 10
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 0 8px;
-      margin-bottom: 28px
-    }
-
-    .ln {
-      font-size: 14.5px;
-      font-weight: 600;
-      letter-spacing: -.3px
-    }
-
-    .ls {
-      font-size: 9.5px;
-      color: var(--muted);
-      letter-spacing: .5px;
-      text-transform: uppercase
-    }
-
-    nav {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      flex: 1
-    }
-
-    .ni {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 10px;
-      border-radius: var(--rs);
-      cursor: pointer;
-      color: var(--muted);
-      font-size: 13px;
-      transition: all .12s;
-      border: 1px solid transparent;
-      user-select: none
-    }
-
-    .ni:hover {
-      color: var(--tx);
-      background: var(--s2)
-    }
-
-    .ni.active {
-      color: var(--acc);
-      background: var(--acc-bg);
-      border-color: var(--acc-br);
-      font-weight: 500
-    }
-
-    .ni svg {
-      width: 14px;
-      height: 14px;
-      opacity: .7;
-      flex-shrink: 0
-    }
-
-    .ndiv {
-      height: 1px;
-      background: var(--b1);
-      margin: 6px 0
-    }
-
-    .sfooter {
-      padding: 0 2px
-    }
-
-    .pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px;
-      background: var(--s2);
-      border-radius: var(--rs);
-      border: 1px solid var(--b1)
-    }
-
-    .av {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--acc-bg);
-      border: 1px solid var(--acc-br);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--acc);
-      flex-shrink: 0
-    }
-
-    .pn {
-      font-size: 12px;
-      font-weight: 500
-    }
-
-    .pr {
-      font-size: 10px;
-      color: var(--muted)
-    }
-
-    .logout-btn {
-      width: 100%;
-      margin-top: 8px;
-      padding: 8px;
-      background: none;
-      border: 1px solid var(--b1);
-      border-radius: var(--rs);
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all .12s
-    }
-
-    .logout-btn:hover {
-      color: var(--danger);
-      border-color: var(--danger)
-    }
-
-    .main {
-      margin-left: 216px;
-      padding: 36px 40px;
-      min-height: 100vh
-    }
-
-    .pg {
-      display: none
-    }
-
-    .pg.on {
-      display: block
-    }
-
-    .ph {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 26px
-    }
-
-    .pt {
-      font-size: 19px;
-      font-weight: 600;
-      letter-spacing: -.4px
-    }
-
-    .ps {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 3px
-    }
-
-    /* stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin-bottom: 26px
-    }
-
-    .sc {
-      background: var(--s1);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 15px 14px;
-      transition: border-color .12s;
-      cursor: pointer
-    }
-
-    .sc:hover {
-      border-color: var(--b2)
-    }
-
-    .sc.active-filter {
-      border-color: var(--acc);
-      background: var(--acc-bg)
-    }
-
-    .sl {
-      font-size: 10px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      margin-bottom: 8px
-    }
-
-    .sv {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -.7px
-    }
-
-    /* filter tabs */
-    .ftabs {
-      display: flex;
-      gap: 2px;
-      margin-bottom: 16px;
-      background: var(--s1);
-      border-radius: var(--rs);
-      padding: 4px;
-      width: fit-content;
-      border: 1px solid var(--b1)
-    }
-
-    .ftab {
-      padding: 6px 16px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--muted);
-      background: transparent;
-      transition: all .12s
-    }
-
-    .ftab:hover {
-      color: var(--tx)
-    }
-
-    .ftab.active {
-      background: var(--s2);
-      color: var(--tx)
-    }
-
-    /* table */
-    .tw {
-      background: var(--s1);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      overflow: hidden
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse
-    }
-
-    thead tr {
-      background: var(--s2);
-      border-bottom: 1px solid var(--b1)
-    }
-
-    th {
-      padding: 10px 16px;
-      text-align: left;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .6px;
-      white-space: nowrap
-    }
-
-    td {
-      padding: 12px 16px;
-      font-size: 13px;
-      border-bottom: 1px solid var(--b1);
-      vertical-align: middle
-    }
-
-    tr:last-child td {
-      border-bottom: none
-    }
-
-    tbody tr:hover td {
-      background: rgba(255, 255, 255, .012)
-    }
-
-    .et {
-      text-align: center;
-      color: var(--muted);
-      padding: 48px !important;
-      font-size: 13px
-    }
-
-    .chip {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      background: var(--acc-bg);
-      color: var(--acc);
-      border: 1px solid var(--acc-br);
-      padding: 3px 8px;
-      border-radius: 4px;
-      letter-spacing: .5px;
-      white-space: nowrap
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 10.5px;
-      font-weight: 500;
-      padding: 3px 8px;
-      border-radius: 20px;
-      white-space: nowrap
-    }
-
-    .badge::before {
-      content: '';
-      width: 4px;
-      height: 4px;
-      border-radius: 50%
-    }
-
-    .bi {
-      background: rgba(91, 156, 246, .1);
-      color: var(--info)
-    }
-
-    .bi::before {
-      background: var(--info)
-    }
-
-    .bo {
-      background: rgba(245, 166, 35, .1);
-      color: var(--warn)
-    }
-
-    .bo::before {
-      background: var(--warn)
-    }
-
-    .bs {
-      background: rgba(76, 175, 125, .1);
-      color: var(--ok)
-    }
-
-    .bs::before {
-      background: var(--ok)
-    }
-
-    .bd {
-      background: rgba(120, 120, 120, .1);
-      color: var(--muted)
-    }
-
-    .bd::before {
-      background: var(--muted)
-    }
-
-    /* pagination */
-    .pagination {
-      display: flex;
-      align-items: center;
-      justify-content: between;
-      gap: 8px;
-      padding: 14px 16px;
-      border-top: 1px solid var(--b1)
-    }
-
-    .pg-info {
-      font-size: 12px;
-      color: var(--muted);
-      flex: 1
-    }
-
-    .pg-btns {
-      display: flex;
-      gap: 4px
-    }
-
-    .pg-btn {
-      padding: 5px 12px;
-      background: var(--s2);
-      border: 1px solid var(--b1);
-      border-radius: 6px;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all .12s
-    }
-
-    .pg-btn:hover:not(:disabled) {
-      color: var(--tx);
-      border-color: var(--b2)
-    }
-
-    .pg-btn:disabled {
-      opacity: .4;
-      cursor: not-allowed
-    }
-
-    .pg-btn.active {
-      background: var(--acc-bg);
-      border-color: var(--acc-br);
-      color: var(--acc)
-    }
-
-    /* invite form */
-    .fc {
-      background: var(--s1);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 26px;
-      max-width: 480px
-    }
-
-    .ft {
-      font-size: 14.5px;
-      font-weight: 600;
-      margin-bottom: 20px
-    }
-
-    .frow {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px
-    }
-
-    .tnote {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--acc-bg);
-      border: 1px solid var(--acc-br);
-      border-radius: var(--rs);
-      padding: 9px 12px;
-      margin-bottom: 16px;
-      font-size: 12px;
-      color: var(--acc)
-    }
-
-    /* success */
-    .sk {
-      display: none;
-      background: var(--s1);
-      border: 1px solid rgba(76, 175, 125, .2);
-      border-radius: var(--r);
-      padding: 22px;
-      margin-bottom: 18px;
-      max-width: 480px
-    }
-
-    .sk.on {
-      display: block
-    }
-
-    .skh {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 16px
-    }
-
-    .skd {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--ok)
-    }
-
-    .skt {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--ok)
-    }
-
-    .cb {
-      font-family: 'DM Mono', monospace;
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--acc);
-      letter-spacing: 3px;
-      background: var(--acc-bg);
-      border: 1px dashed var(--acc-br);
-      border-radius: var(--rs);
-      padding: 14px 16px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between
-    }
-
-    .cpb {
-      font-size: 11px;
-      padding: 5px 12px;
-      cursor: pointer;
-      background: var(--s2);
-      border: 1px solid var(--b2);
-      border-radius: 5px;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      transition: all .12s
-    }
-
-    .cpb:hover {
-      color: var(--tx)
-    }
-
-    .ir {
-      display: flex;
-      gap: 12px;
-      font-size: 11.5px;
-      color: var(--muted);
-      margin-bottom: 12px;
-      flex-wrap: wrap
-    }
-
-    .eok {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 9px 12px;
-      background: rgba(76, 175, 125, .07);
-      border: 1px solid rgba(76, 175, 125, .15);
-      border-radius: var(--rs);
-      font-size: 12.5px;
-      color: var(--ok)
-    }
-
-    .efail {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 9px 12px;
-      background: rgba(255, 92, 92, .07);
-      border: 1px solid rgba(255, 92, 92, .15);
-      border-radius: var(--rs);
-      font-size: 12.5px;
-      color: var(--danger)
-    }
-
-    /* earnings */
-    .estrip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px
-    }
-
-    .ec {
-      background: var(--s1);
-      border: 1px solid var(--b1);
-      border-radius: var(--r);
-      padding: 14px
-    }
-
-    .el {
-      font-size: 10px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      margin-bottom: 6px
-    }
-
-    .ev {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -.5px
-    }
-
-    .ei {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 13px 16px;
-      border-bottom: 1px solid var(--b1)
-    }
-
-    .ei:last-child {
-      border-bottom: none
-    }
-
-    .eg {
-      font-size: 13.5px;
-      font-weight: 500
-    }
-
-    .er {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 2px
-    }
-
-    .ea {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--ok);
-      letter-spacing: -.5px
-    }
-
-    .epd {
-      font-size: 10.5px;
-      color: var(--ok);
-      margin-top: 2px;
-      text-align: right
-    }
-
-    .ep {
-      font-size: 10.5px;
-      color: var(--warn);
-      margin-top: 2px;
-      text-align: right
-    }
-
-    .ee {
-      text-align: center;
-      padding: 48px;
-      color: var(--muted);
-      font-size: 13px
-    }
-
-    .spin {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 2px solid var(--b2);
-      border-top-color: var(--acc);
-      border-radius: 50%;
-      animation: spin .6s linear infinite;
-      margin-right: 6px;
-      vertical-align: middle
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg)
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>GymScribe — Marketer</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0c0c;--s1:#161616;--s2:#1e1e1e;--s3:#262626;
+  --b1:#2a2a2a;--b2:#363636;
+  --tx:#efefef;--muted:#777;--dim:#444;
+  --acc:#c8f135;--acc-bg:rgba(200,241,53,.07);--acc-br:rgba(200,241,53,.18);
+  --ok:#4caf7d;--warn:#f5a623;--info:#5b9cf6;--danger:#ff5c5c;
+  --r:12px;--rs:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:14px;line-height:1.5}
+
+/* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:36px;width:100%;max-width:380px}
+.login-logo{display:flex;align-items:center;gap:9px;margin-bottom:28px}
+.lm{width:32px;height:32px;background:var(--acc);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#0c0c0c;letter-spacing:-.5px}
+.login-title{font-size:20px;font-weight:600;letter-spacing:-.4px;margin-bottom:6px}
+.login-sub{font-size:12.5px;color:var(--muted);margin-bottom:24px}
+.field{margin-bottom:14px}
+.fl{display:block;font-size:11px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+input,select{width:100%;padding:9px 11px;background:var(--s2);border:1px solid var(--b1);border-radius:var(--rs);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .12s}
+input:focus,select:focus{border-color:var(--acc-br)}
+input::placeholder{color:var(--dim)}
+.pbtn{width:100%;padding:11px;background:var(--acc);color:#0c0c0c;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;border:none;border-radius:var(--rs);cursor:pointer;transition:background .12s;margin-top:4px}
+.pbtn:hover{background:#b5d92e}
+.pbtn:disabled{opacity:.5;cursor:not-allowed}
+.err{font-size:12.5px;color:var(--danger);margin-top:10px;text-align:center;min-height:18px}
+
+/* APP */
+#app{display:none}
+.shell{display:flex;min-height:100vh}
+.sidebar{width:216px;position:fixed;inset:0 auto 0 0;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;padding:20px 10px 18px;z-index:10}
+.logo{display:flex;align-items:center;gap:9px;padding:0 8px;margin-bottom:28px}
+.ln{font-size:14.5px;font-weight:600;letter-spacing:-.3px}
+.ls{font-size:9.5px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+nav{display:flex;flex-direction:column;gap:2px;flex:1}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--rs);cursor:pointer;color:var(--muted);font-size:13px;transition:all .12s;border:1px solid transparent;user-select:none}
+.ni:hover{color:var(--tx);background:var(--s2)}
+.ni.active{color:var(--acc);background:var(--acc-bg);border-color:var(--acc-br);font-weight:500}
+.ni svg{width:14px;height:14px;opacity:.7;flex-shrink:0}
+.ndiv{height:1px;background:var(--b1);margin:6px 0}
+.sfooter{padding:0 2px}
+.pill{display:flex;align-items:center;gap:8px;padding:9px;background:var(--s2);border-radius:var(--rs);border:1px solid var(--b1)}
+.av{width:28px;height:28px;border-radius:50%;background:var(--acc-bg);border:1px solid var(--acc-br);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--acc);flex-shrink:0}
+.pn{font-size:12px;font-weight:500}
+.pr{font-size:10px;color:var(--muted)}
+.logout-btn{width:100%;margin-top:8px;padding:8px;background:none;border:1px solid var(--b1);border-radius:var(--rs);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:all .12s}
+.logout-btn:hover{color:var(--danger);border-color:var(--danger)}
+
+.main{margin-left:216px;padding:36px 40px;min-height:100vh}
+.pg{display:none}.pg.on{display:block}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:26px}
+.pt{font-size:19px;font-weight:600;letter-spacing:-.4px}
+.ps{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:26px}
+.sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:15px 14px;transition:border-color .12s;cursor:pointer}
+.sc:hover{border-color:var(--b2)}
+.sc.active-filter{border-color:var(--acc);background:var(--acc-bg)}
+.sl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
+.sv{font-size:22px;font-weight:600;letter-spacing:-.7px}
+
+/* filter tabs */
+.ftabs{display:flex;gap:2px;margin-bottom:16px;background:var(--s1);border-radius:var(--rs);padding:4px;width:fit-content;border:1px solid var(--b1)}
+.ftab{padding:6px 16px;border-radius:6px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;color:var(--muted);background:transparent;transition:all .12s}
+.ftab:hover{color:var(--tx)}
+.ftab.active{background:var(--s2);color:var(--tx)}
+
+/* table */
+.tw{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead tr{background:var(--s2);border-bottom:1px solid var(--b1)}
+th{padding:10px 16px;text-align:left;font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;white-space:nowrap}
+td{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--b1);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(255,255,255,.012)}
+.et{text-align:center;color:var(--muted);padding:48px!important;font-size:13px}
+
+.chip{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;background:var(--acc-bg);color:var(--acc);border:1px solid var(--acc-br);padding:3px 8px;border-radius:4px;letter-spacing:.5px;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.badge::before{content:'';width:4px;height:4px;border-radius:50%}
+.bi{background:rgba(91,156,246,.1);color:var(--info)}.bi::before{background:var(--info)}
+.bo{background:rgba(245,166,35,.1);color:var(--warn)}.bo::before{background:var(--warn)}
+.bs{background:rgba(76,175,125,.1);color:var(--ok)}.bs::before{background:var(--ok)}
+.bd{background:rgba(120,120,120,.1);color:var(--muted)}.bd::before{background:var(--muted)}
+
+/* pagination */
+.pagination{display:flex;align-items:center;justify-content:between;gap:8px;padding:14px 16px;border-top:1px solid var(--b1)}
+.pg-info{font-size:12px;color:var(--muted);flex:1}
+.pg-btns{display:flex;gap:4px}
+.pg-btn{padding:5px 12px;background:var(--s2);border:1px solid var(--b1);border-radius:6px;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:all .12s}
+.pg-btn:hover:not(:disabled){color:var(--tx);border-color:var(--b2)}
+.pg-btn:disabled{opacity:.4;cursor:not-allowed}
+.pg-btn.active{background:var(--acc-bg);border-color:var(--acc-br);color:var(--acc)}
+
+/* invite form */
+.fc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:26px;max-width:480px}
+.ft{font-size:14.5px;font-weight:600;margin-bottom:20px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.tnote{display:flex;align-items:center;gap:7px;background:var(--acc-bg);border:1px solid var(--acc-br);border-radius:var(--rs);padding:9px 12px;margin-bottom:16px;font-size:12px;color:var(--acc)}
+
+/* success */
+.sk{display:none;background:var(--s1);border:1px solid rgba(76,175,125,.2);border-radius:var(--r);padding:22px;margin-bottom:18px;max-width:480px}
+.sk.on{display:block}
+.skh{display:flex;align-items:center;gap:7px;margin-bottom:16px}
+.skd{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.skt{font-size:13.5px;font-weight:600;color:var(--ok)}
+.cb{font-family:'DM Mono',monospace;font-size:24px;font-weight:600;color:var(--acc);letter-spacing:3px;background:var(--acc-bg);border:1px dashed var(--acc-br);border-radius:var(--rs);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.cpb{font-size:11px;padding:5px 12px;cursor:pointer;background:var(--s2);border:1px solid var(--b2);border-radius:5px;color:var(--muted);font-family:'DM Sans',sans-serif;transition:all .12s}
+.cpb:hover{color:var(--tx)}
+.ir{display:flex;gap:12px;font-size:11.5px;color:var(--muted);margin-bottom:12px;flex-wrap:wrap}
+.eok{display:flex;align-items:center;gap:7px;padding:9px 12px;background:rgba(76,175,125,.07);border:1px solid rgba(76,175,125,.15);border-radius:var(--rs);font-size:12.5px;color:var(--ok)}
+.efail{display:flex;align-items:center;gap:7px;padding:9px 12px;background:rgba(255,92,92,.07);border:1px solid rgba(255,92,92,.15);border-radius:var(--rs);font-size:12.5px;color:var(--danger)}
+
+/* earnings */
+.estrip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.ec{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:14px}
+.el{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
+.ev{font-size:20px;font-weight:600;letter-spacing:-.5px}
+.ei{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--b1)}
+.ei:last-child{border-bottom:none}
+.eg{font-size:13.5px;font-weight:500}
+.er{font-size:11px;color:var(--muted);margin-top:2px}
+.ea{font-size:17px;font-weight:600;color:var(--ok);letter-spacing:-.5px}
+.epd{font-size:10.5px;color:var(--ok);margin-top:2px;text-align:right}
+.ep{font-size:10.5px;color:var(--warn);margin-top:2px;text-align:right}
+.ee{text-align:center;padding:48px;color:var(--muted);font-size:13px}
+
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--b2);border-top-color:var(--acc);border-radius:50%;animation:spin .6s linear infinite;margin-right:6px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
 </head>
-
 <body>
-  <div id="file-notice"
-    style="display:none;position:fixed;inset:0;background:#0c0c0c;z-index:9999;align-items:center;justify-content:center;padding:20px;font-family:DM Sans,sans-serif">
-    <div style="max-width:460px;text-align:center">
-      <div
-        style="width:38px;height:38px;background:#c8f135;border-radius:8px;line-height:38px;font-weight:800;font-size:15px;color:#0c0c0c;margin:0 auto 20px">
-        G</div>
-      <h2 style="font-size:18px;font-weight:600;color:#efefef;margin-bottom:10px">Serve this file over HTTP</h2>
-      <p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:20px">Browsers block network requests from <code
-          style="background:#1e1e1e;padding:2px 6px;border-radius:4px;color:#c8f135">file://</code>.<br>Run this command
-        in the same folder, then open the URL below.</p>
-      <div
-        style="background:#161616;border:1px solid #2a2a2a;border-radius:10px;padding:18px;text-align:left;margin-bottom:14px">
-        <div style="font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Python (no
-          install needed)</div>
-        <code
-          style="font-family:DM Mono,monospace;font-size:13px;color:#c8f135;display:block;margin-bottom:14px">python3 -m http.server 8080</code>
-        <div style="font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Node</div>
-        <code style="font-family:DM Mono,monospace;font-size:13px;color:#c8f135">npx serve .</code>
-      </div>
-      <p style="font-size:12.5px;color:#555">Then open: <code
-          style="background:#1e1e1e;padding:2px 8px;border-radius:4px;color:#c8f135">http://localhost:8080/marketer-dashboard.html</code>
-      </p>
+<div id="file-notice" style="display:none;position:fixed;inset:0;background:#0c0c0c;z-index:9999;align-items:center;justify-content:center;padding:20px;font-family:DM Sans,sans-serif">
+  <div style="max-width:460px;text-align:center">
+    <div style="width:38px;height:38px;background:#c8f135;border-radius:8px;line-height:38px;font-weight:800;font-size:13px;color:#0c0c0c;margin:0 auto 20px">GS</div>
+    <h2 style="font-size:18px;font-weight:600;color:#efefef;margin-bottom:10px">Serve this file over HTTP</h2>
+    <p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:20px">Browsers block network requests from <code style="background:#1e1e1e;padding:2px 6px;border-radius:4px;color:#c8f135">file://</code>.<br>Run this command in the same folder, then open the URL below.</p>
+    <div style="background:#161616;border:1px solid #2a2a2a;border-radius:10px;padding:18px;text-align:left;margin-bottom:14px">
+      <div style="font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Python (no install needed)</div>
+      <code style="font-family:DM Mono,monospace;font-size:13px;color:#c8f135;display:block;margin-bottom:14px">python3 -m http.server 8080</code>
+      <div style="font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Node</div>
+      <code style="font-family:DM Mono,monospace;font-size:13px;color:#c8f135">npx serve .</code>
     </div>
+    <p style="font-size:12.5px;color:#555">Then open: <code style="background:#1e1e1e;padding:2px 8px;border-radius:4px;color:#c8f135">http://localhost:8080/marketer-dashboard.html</code></p>
   </div>
-  <script>
-    if (location.protocol === "file:") {
-      var n = document.getElementById("file-notice");
-      if (n) { n.style.display = "flex"; }
-    }
-  </script>
+</div>
+<script>
+if(location.protocol==="file:"){
+  var n=document.getElementById("file-notice");
+  if(n){n.style.display="flex";}
+}
+</script>
 
-  <!-- LOGIN -->
-  <div id="login-screen">
-    <div class="login-box">
-      <div class="login-logo">
-        <div class="lm">GS</div>
-        <div>
-          <div style="font-size:15px;font-weight:600">GymScribe</div>
-          <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Marketer portal
-          </div>
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="lm">GS</div>
+      <div><div style="font-size:15px;font-weight:600">GymScribe</div><div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Marketer portal</div></div>
+    </div>
+    <div class="login-title">Welcome back</div>
+    <div class="login-sub">Sign in to your marketer account</div>
+    <div class="field"><label class="fl">Email</label><input type="email" id="l-email" placeholder="you@example.com"></div>
+    <div class="field"><label class="fl">Password</label><input type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()"></div>
+    <button class="pbtn" id="l-btn" onclick="login()">Sign in</button>
+    <div class="err" id="l-err"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<div class="shell">
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="lm">GS</div>
+      <div><div class="ln">GymScribe</div><div class="ls">Marketer</div></div>
+    </div>
+    <nav>
+      <div class="ni active" onclick="go('overview')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        Overview
+      </div>
+      <div class="ni" onclick="go('invite')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        Send invite
+      </div>
+      <div class="ndiv"></div>
+      <div class="ni" onclick="go('earnings')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M6 10.5c0 0 .8 1 2 1s2.5-.8 2.5-2c0-2.5-4.5-1.5-4.5-4 0-1.2 1-2 2.5-2s2 1 2 1"/><line x1="8" y1="4" x2="8" y2="12"/></svg>
+        Earnings
+      </div>
+    </nav>
+    <div class="sfooter">
+      <div class="pill">
+        <div class="av" id="av">MK</div>
+        <div><div class="pn" id="mk-name">—</div><div class="pr">Field agent</div></div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <div id="pg-overview" class="pg on">
+      <div class="ph">
+        <div><div class="pt">Overview</div><div class="ps">Your invites and performance</div></div>
+      </div>
+      <div class="stats">
+        <div class="sc" onclick="filterTab('all')" id="sc-all"><div class="sl">All invites</div><div class="sv" id="s-inv">—</div></div>
+        <div class="sc" onclick="filterTab('invited')" id="sc-invited"><div class="sl">Invited</div><div class="sv" id="s-invited">—</div></div>
+        <div class="sc" onclick="filterTab('onboarded')" id="sc-onboarded"><div class="sl">Onboarded</div><div class="sv" id="s-onb">—</div></div>
+        <div class="sc" onclick="filterTab('subscribed')" id="sc-subscribed"><div class="sl">Subscribed</div><div class="sv" style="color:var(--acc)" id="s-sub">—</div></div>
+        <div class="sc"><div class="sl">Total earned</div><div class="sv" style="color:var(--acc)" id="s-earn">—</div></div>
+      </div>
+      <div class="ftabs" id="ftabs">
+        <button class="ftab active" onclick="filterTab('all')">All</button>
+        <button class="ftab" onclick="filterTab('invited')">Invited</button>
+        <button class="ftab" onclick="filterTab('onboarded')">Onboarded</button>
+        <button class="ftab" onclick="filterTab('subscribed')">Subscribed</button>
+        <button class="ftab" onclick="filterTab('dead')">Dead</button>
+      </div>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Gym</th><th>Email</th><th>Coupon</th><th>Status</th><th>Invited on</th><th>Onboarded</th><th>Subscribed</th></tr></thead>
+          <tbody id="ov-body"><tr><td class="et" colspan="7"><span class="spin"></span>Loading…</td></tr></tbody>
+        </table>
+        <div class="pagination" id="ov-pg" style="display:none">
+          <div class="pg-info" id="pg-info"></div>
+          <div class="pg-btns" id="pg-btns"></div>
         </div>
       </div>
-      <div class="login-title">Welcome back</div>
-      <div class="login-sub">Sign in to your marketer account</div>
-      <div class="field"><label class="fl">Email</label><input type="email" id="l-email" placeholder="you@example.com">
+    </div>
+
+    <!-- SEND INVITE -->
+    <div id="pg-invite" class="pg">
+      <div class="ph">
+        <div><div class="pt">Send invite</div><div class="ps">A 40-day coupon is generated &amp; emailed automatically</div></div>
       </div>
-      <div class="field"><label class="fl">Password</label><input type="password" id="l-pass" placeholder="••••••••"
-          onkeydown="if(event.key==='Enter')login()"></div>
-      <button class="pbtn" id="l-btn" onclick="login()">Sign in</button>
-      <div class="err" id="l-err"></div>
+      <div class="sk" id="sk">
+        <div class="skh"><div class="skd"></div><div class="skt">Invite sent successfully!</div></div>
+        <div class="cb"><span id="sk-code">—</span><button class="cpb" id="cpb" onclick="copyCode()">Copy</button></div>
+        <div class="ir"><span>🎁 40 days free</span><span>🔒 One-time use</span><span>📧 Locked to their email</span></div>
+        <div id="sk-email-status"></div>
+      </div>
+      <div class="fc">
+        <div class="ft">Gym details</div>
+        <div class="tnote">🎁 Every invite gets a <strong>&nbsp;40-day free trial coupon&nbsp;</strong> — one use, locked to their email</div>
+        <div class="frow">
+          <div><label class="fl">Gym name *</label><input type="text" id="f-gym" placeholder="e.g. Iron Fit Gym"></div>
+          <div><label class="fl">Owner email *</label><input type="email" id="f-email" placeholder="owner@gmail.com"></div>
+        </div>
+        <button class="pbtn" id="gbtn" onclick="sendInvite()">Generate coupon &amp; send invite email</button>
+        <div class="err" id="inv-err"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- APP -->
-  <div id="app">
-    <div class="shell">
-      <aside class="sidebar">
-        <div class="logo">
-          <div class="lm">GS</div>
-          <div>
-            <div class="ln">GymScribe</div>
-            <div class="ls">Marketer</div>
-          </div>
-        </div>
-        <nav>
-          <div class="ni active" onclick="go('overview')">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="1" y="1" width="6" height="6" rx="1" />
-              <rect x="9" y="1" width="6" height="6" rx="1" />
-              <rect x="1" y="9" width="6" height="6" rx="1" />
-              <rect x="9" y="9" width="6" height="6" rx="1" />
-            </svg>
-            Overview
-          </div>
-          <div class="ni" onclick="go('invite')">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <line x1="8" y1="2" x2="8" y2="14" />
-              <line x1="2" y1="8" x2="14" y2="8" />
-            </svg>
-            Send invite
-          </div>
-          <div class="ndiv"></div>
-          <div class="ni" onclick="go('earnings')">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="8" cy="8" r="6" />
-              <path d="M6 10.5c0 0 .8 1 2 1s2.5-.8 2.5-2c0-2.5-4.5-1.5-4.5-4 0-1.2 1-2 2.5-2s2 1 2 1" />
-              <line x1="8" y1="4" x2="8" y2="12" />
-            </svg>
-            Earnings
-          </div>
-        </nav>
-        <div class="sfooter">
-          <div class="pill">
-            <div class="av" id="av">MK</div>
-            <div>
-              <div class="pn" id="mk-name">—</div>
-              <div class="pr">Field agent</div>
-            </div>
-          </div>
-          <button class="logout-btn" onclick="logout()">Sign out</button>
-        </div>
-      </aside>
-
-      <main class="main">
-
-        <!-- OVERVIEW -->
-        <div id="pg-overview" class="pg on">
-          <div class="ph">
-            <div>
-              <div class="pt">Overview</div>
-              <div class="ps">Your invites and performance</div>
-            </div>
-          </div>
-          <div class="stats">
-            <div class="sc" onclick="filterTab('all')" id="sc-all">
-              <div class="sl">All invites</div>
-              <div class="sv" id="s-inv">—</div>
-            </div>
-            <div class="sc" onclick="filterTab('invited')" id="sc-invited">
-              <div class="sl">Invited</div>
-              <div class="sv" id="s-invited">—</div>
-            </div>
-            <div class="sc" onclick="filterTab('onboarded')" id="sc-onboarded">
-              <div class="sl">Onboarded</div>
-              <div class="sv" id="s-onb">—</div>
-            </div>
-            <div class="sc" onclick="filterTab('subscribed')" id="sc-subscribed">
-              <div class="sl">Subscribed</div>
-              <div class="sv" style="color:var(--acc)" id="s-sub">—</div>
-            </div>
-            <div class="sc">
-              <div class="sl">Total earned</div>
-              <div class="sv" style="color:var(--acc)" id="s-earn">—</div>
-            </div>
-          </div>
-          <div class="ftabs" id="ftabs">
-            <button class="ftab active" onclick="filterTab('all')">All</button>
-            <button class="ftab" onclick="filterTab('invited')">Invited</button>
-            <button class="ftab" onclick="filterTab('onboarded')">Onboarded</button>
-            <button class="ftab" onclick="filterTab('subscribed')">Subscribed</button>
-            <button class="ftab" onclick="filterTab('dead')">Dead</button>
-          </div>
-          <div class="tw">
-            <table>
-              <thead>
-                <tr>
-                  <th>Gym</th>
-                  <th>Email</th>
-                  <th>Coupon</th>
-                  <th>Status</th>
-                  <th>Invited on</th>
-                  <th>Onboarded</th>
-                  <th>Subscribed</th>
-                </tr>
-              </thead>
-              <tbody id="ov-body">
-                <tr>
-                  <td class="et" colspan="7"><span class="spin"></span>Loading…</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="pagination" id="ov-pg" style="display:none">
-              <div class="pg-info" id="pg-info"></div>
-              <div class="pg-btns" id="pg-btns"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEND INVITE -->
-        <div id="pg-invite" class="pg">
-          <div class="ph">
-            <div>
-              <div class="pt">Send invite</div>
-              <div class="ps">A 40-day coupon is generated &amp; emailed automatically</div>
-            </div>
-          </div>
-          <div class="sk" id="sk">
-            <div class="skh">
-              <div class="skd"></div>
-              <div class="skt">Invite sent successfully!</div>
-            </div>
-            <div class="cb"><span id="sk-code">—</span><button class="cpb" id="cpb" onclick="copyCode()">Copy</button>
-            </div>
-            <div class="ir"><span>🎁 40 days free</span><span>🔒 One-time use</span><span>📧 Locked to their
-                email</span></div>
-            <div id="sk-email-status"></div>
-          </div>
-          <div class="fc">
-            <div class="ft">Gym details</div>
-            <div class="tnote">🎁 Every invite gets a <strong>&nbsp;40-day free trial coupon&nbsp;</strong> — one use,
-              locked to their email</div>
-            <div class="frow">
-              <div><label class="fl">Gym name *</label><input type="text" id="f-gym" placeholder="e.g. Iron Fit Gym">
-              </div>
-              <div><label class="fl">Owner email *</label><input type="email" id="f-email"
-                  placeholder="owner@gmail.com"></div>
-            </div>
-            <button class="pbtn" id="gbtn" onclick="sendInvite()">Generate coupon &amp; send invite email</button>
-            <div class="err" id="inv-err"></div>
-          </div>
-        </div>
-
-        <!-- EARNINGS -->
-        <div id="pg-earnings" class="pg">
-          <div class="ph">
-            <div>
-              <div class="pt">Earnings</div>
-              <div class="ps">10% referral when your gym takes a paid plan</div>
-            </div>
-          </div>
-          <div class="estrip">
-            <div class="ec">
-              <div class="el">Total earned</div>
-              <div class="ev" style="color:var(--acc)" id="et">—</div>
-            </div>
-            <div class="ec">
-              <div class="el">Pending payout</div>
-              <div class="ev" style="color:var(--warn)" id="epend">—</div>
-            </div>
-          </div>
-          <div class="tw">
-            <div id="earn-body">
-              <div class="ee"><span class="spin"></span>Loading…</div>
-            </div>
-          </div>
-        </div>
-
-      </main>
+    <!-- EARNINGS -->
+    <div id="pg-earnings" class="pg">
+      <div class="ph">
+        <div><div class="pt">Earnings</div><div class="ps">10% referral when your gym takes a paid plan</div></div>
+      </div>
+      <div class="estrip">
+        <div class="ec"><div class="el">Total earned</div><div class="ev" style="color:var(--acc)" id="et">—</div></div>
+        <div class="ec"><div class="el">Pending payout</div><div class="ev" style="color:var(--warn)" id="epend">—</div></div>
+      </div>
+      <div class="tw"><div id="earn-body"><div class="ee"><span class="spin"></span>Loading…</div></div></div>
     </div>
-  </div>
 
-  <script src="config.js"></script>
-  <script>
-    // Prevent re-initialization if config.js already created sb
-    if (!window.sb) {
-      window.sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-    }
+  </main>
+</div>
+</div>
 
-    const PAGE_SIZE = 10;
-    let allInvites = [];
-    let filteredInvites = [];
-    let currentPage = 1;
-    let currentFilter = 'all';
-    let lastCode = '';
-    let dashData = null;
+<script>
+const SUPABASE_URL  = 'https://jmreuppppukydnajtulx.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptcmV1cHBwcHVreWRuYWp0dWx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4ODE4MDksImV4cCI6MjA5MjQ1NzgwOX0.Kl7ryWIeb3GCLTiiFwrEPVIdvMzlvkdBmbOa_LNTU40';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-    // ── AUTH ──────────────────────────────────────────────────────────────────────
-    async function login() {
-      const email = document.getElementById('l-email').value.trim();
-      const pass = document.getElementById('l-pass').value;
-      const btn = document.getElementById('l-btn');
-      const err = document.getElementById('l-err');
-      if (!email || !pass) { err.textContent = 'Enter email and password.'; return; }
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Signing in…'; err.textContent = '';
-      const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
-      if (error) { err.textContent = error.message; btn.disabled = false; btn.textContent = 'Sign in'; return; }
-      await initApp(data.user);
-    }
+const PAGE_SIZE = 10;
+let allInvites  = [];
+let filteredInvites = [];
+let currentPage = 1;
+let currentFilter = 'all';
+let lastCode = '';
+let dashData = null;
 
-    async function logout() {
-      await sb.auth.signOut();
-      document.getElementById('app').style.display = 'none';
-      document.getElementById('login-screen').style.display = 'flex';
-    }
+// ── AUTH ──────────────────────────────────────────────────────────────────────
+async function login(){
+  const email = document.getElementById('l-email').value.trim();
+  const pass  = document.getElementById('l-pass').value;
+  const btn   = document.getElementById('l-btn');
+  const err   = document.getElementById('l-err');
+  if(!email||!pass){ err.textContent='Enter email and password.'; return; }
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span>Signing in…'; err.textContent='';
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if(error){ err.textContent = error.message; btn.disabled=false; btn.textContent='Sign in'; return; }
+  await initApp(data.user);
+}
 
-    async function initApp(user) {
-      const { data: mkData, error: mkErr } = await sb.rpc('get_marketer_dashboard');
-      if (mkErr || !mkData) {
-        const msg = (mkErr?.message || '').includes('NOT_A_MARKETER')
-          ? 'This account is not a marketer.'
-          : mkErr?.message || 'Failed to load. Try again.';
-        document.getElementById('l-err').textContent = msg;
-        await sb.auth.signOut();
-        document.getElementById('l-btn').disabled = false;
-        document.getElementById('l-btn').textContent = 'Sign in';
-        return;
-      }
-      dashData = mkData;
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      const name = mkData.marketer?.name || user.email;
-      document.getElementById('mk-name').textContent = name;
-      document.getElementById('av').textContent = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-      renderAll(mkData);
-    }
+async function logout(){
+  await sb.auth.signOut();
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+}
 
-    // ── DATA ──────────────────────────────────────────────────────────────────────
-    async function refreshDash() {
-      const { data } = await sb.rpc('get_marketer_dashboard');
-      if (data) { dashData = data; renderAll(data); }
-    }
+async function initApp(user){
+  const { data: mkData, error: mkErr } = await sb.rpc('get_marketer_dashboard');
+  if(mkErr || !mkData){
+    const msg = (mkErr?.message||'').includes('NOT_A_MARKETER')
+      ? 'This account is not a marketer.'
+      : mkErr?.message || 'Failed to load. Try again.';
+    document.getElementById('l-err').textContent = msg;
+    await sb.auth.signOut();
+    document.getElementById('l-btn').disabled=false;
+    document.getElementById('l-btn').textContent='Sign in';
+    return;
+  }
+  dashData = mkData;
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  const name = mkData.marketer?.name || user.email;
+  document.getElementById('mk-name').textContent = name;
+  document.getElementById('av').textContent = name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  renderAll(mkData);
+}
 
-    function renderAll(d) {
-      allInvites = d.invites || [];
-      renderStats(d.stats);
-      applyFilter(currentFilter);
-      renderEarnings(d.earnings, d.stats);
-    }
+// ── DATA ──────────────────────────────────────────────────────────────────────
+async function refreshDash(){
+  const { data } = await sb.rpc('get_marketer_dashboard');
+  if(data){ dashData=data; renderAll(data); }
+}
 
-    function renderStats(s) {
-      document.getElementById('s-inv').textContent = s?.total_invited ?? 0;
-      document.getElementById('s-invited').textContent = allInvites.filter(i => i.status === 'invited').length;
-      document.getElementById('s-onb').textContent = s?.total_onboarded ?? 0;
-      document.getElementById('s-sub').textContent = s?.total_subscribed ?? 0;
-      document.getElementById('s-earn').textContent = inr(s?.total_earned ?? 0);
-    }
+function renderAll(d){
+  allInvites = d.invites || [];
+  renderStats(d.stats);
+  applyFilter(currentFilter);
+  renderEarnings(d.earnings, d.stats);
+}
 
-    // ── FILTER + PAGINATION ───────────────────────────────────────────────────────
-    function filterTab(f) {
-      currentFilter = f; currentPage = 1;
-      // Update tabs
-      document.querySelectorAll('.ftab').forEach((el, i) => {
-        el.classList.toggle('active', ['all', 'invited', 'onboarded', 'subscribed', 'dead'][i] === f);
-      });
-      // Update stat cards
-      ['all', 'invited', 'onboarded', 'subscribed'].forEach(s => {
-        document.getElementById('sc-' + s)?.classList.toggle('active-filter', s === f);
-      });
-      applyFilter(f);
-    }
+function renderStats(s){
+  document.getElementById('s-inv').textContent     = s?.total_invited    ?? 0;
+  document.getElementById('s-invited').textContent = allInvites.filter(i=>i.status==='invited').length;
+  document.getElementById('s-onb').textContent     = s?.total_onboarded  ?? 0;
+  document.getElementById('s-sub').textContent     = s?.total_subscribed ?? 0;
+  document.getElementById('s-earn').textContent    = inr(s?.total_earned ?? 0);
+}
 
-    function applyFilter(f) {
-      filteredInvites = f === 'all' ? allInvites : allInvites.filter(i => i.status === f);
-      renderTable();
-    }
+// ── FILTER + PAGINATION ───────────────────────────────────────────────────────
+function filterTab(f){
+  currentFilter = f; currentPage = 1;
+  // Update tabs
+  document.querySelectorAll('.ftab').forEach((el,i)=>{
+    el.classList.toggle('active', ['all','invited','onboarded','subscribed','dead'][i]===f);
+  });
+  // Update stat cards
+  ['all','invited','onboarded','subscribed'].forEach(s=>{
+    document.getElementById('sc-'+s)?.classList.toggle('active-filter', s===f);
+  });
+  applyFilter(f);
+}
 
-    function renderTable() {
-      const tbody = document.getElementById('ov-body');
-      const pgDiv = document.getElementById('ov-pg');
-      const total = filteredInvites.length;
+function applyFilter(f){
+  filteredInvites = f==='all' ? allInvites : allInvites.filter(i=>i.status===f);
+  renderTable();
+}
 
-      if (!total) {
-        tbody.innerHTML = `<tr><td class="et" colspan="7">No ${currentFilter === 'all' ? 'invites' : currentFilter + ' invites'} yet.</td></tr>`;
-        pgDiv.style.display = 'none'; return;
-      }
+function renderTable(){
+  const tbody = document.getElementById('ov-body');
+  const pgDiv = document.getElementById('ov-pg');
+  const total = filteredInvites.length;
 
-      const totalPages = Math.ceil(total / PAGE_SIZE);
-      currentPage = Math.min(currentPage, totalPages);
-      const start = (currentPage - 1) * PAGE_SIZE;
-      const slice = filteredInvites.slice(start, start + PAGE_SIZE);
+  if(!total){
+    tbody.innerHTML=`<tr><td class="et" colspan="7">No ${currentFilter==='all'?'invites':currentFilter+' invites'} yet.</td></tr>`;
+    pgDiv.style.display='none'; return;
+  }
 
-      tbody.innerHTML = slice.map(i => `
+  const totalPages = Math.ceil(total/PAGE_SIZE);
+  currentPage = Math.min(currentPage, totalPages);
+  const start = (currentPage-1)*PAGE_SIZE;
+  const slice = filteredInvites.slice(start, start+PAGE_SIZE);
+
+  tbody.innerHTML = slice.map(i=>`
     <tr>
       <td style="font-weight:500">${i.gym_name}</td>
       <td style="color:var(--muted);font-size:12px">${i.email}</td>
-      <td><span class="chip">${i.coupon_code || '—'}</span></td>
+      <td><span class="chip">${i.coupon_code||'—'}</span></td>
       <td>${badge(i.status)}</td>
       <td style="color:var(--muted);font-size:12px">${fmt(i.invited_at)}</td>
       <td style="color:var(--muted);font-size:12px">${fmt(i.onboarded_at)}</td>
       <td style="color:var(--muted);font-size:12px">${fmt(i.subscribed_at)}</td>
     </tr>`).join('');
 
-      // Pagination
-      pgDiv.style.display = 'flex';
-      document.getElementById('pg-info').textContent =
-        `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, total)} of ${total}`;
+  // Pagination
+  pgDiv.style.display='flex';
+  document.getElementById('pg-info').textContent =
+    `Showing ${start+1}–${Math.min(start+PAGE_SIZE,total)} of ${total}`;
 
-      const btns = document.getElementById('pg-btns');
-      let html = `<button class="pg-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>`;
-      for (let p = 1; p <= totalPages; p++) {
-        if (totalPages <= 7 || p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1) {
-          html += `<button class="pg-btn ${p === currentPage ? 'active' : ''}" onclick="changePage(${p})">${p}</button>`;
-        } else if (Math.abs(p - currentPage) === 2) {
-          html += `<button class="pg-btn" disabled style="border:none;background:none">…</button>`;
-        }
-      }
-      html += `<button class="pg-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>`;
-      btns.innerHTML = html;
+  const btns = document.getElementById('pg-btns');
+  let html = `<button class="pg-btn" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>← Prev</button>`;
+  for(let p=1;p<=totalPages;p++){
+    if(totalPages<=7 || p===1 || p===totalPages || Math.abs(p-currentPage)<=1){
+      html+=`<button class="pg-btn ${p===currentPage?'active':''}" onclick="changePage(${p})">${p}</button>`;
+    } else if(Math.abs(p-currentPage)===2){
+      html+=`<button class="pg-btn" disabled style="border:none;background:none">…</button>`;
     }
+  }
+  html+=`<button class="pg-btn" onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>Next →</button>`;
+  btns.innerHTML = html;
+}
 
-    function changePage(p) {
-      if (p < 1 || p > Math.ceil(filteredInvites.length / PAGE_SIZE)) return;
-      currentPage = p; renderTable();
-      document.querySelector('.main').scrollTo({ top: 0, behavior: 'smooth' });
-    }
+function changePage(p){
+  if(p<1 || p>Math.ceil(filteredInvites.length/PAGE_SIZE)) return;
+  currentPage=p; renderTable();
+  document.querySelector('.main').scrollTo({top:0,behavior:'smooth'});
+}
 
-    // ── SEND INVITE ───────────────────────────────────────────────────────────────
-    async function sendInvite() {
-      const gym = document.getElementById('f-gym').value.trim();
-      const email = document.getElementById('f-email').value.trim().toLowerCase();
-      const err = document.getElementById('inv-err');
-      err.textContent = '';
+// ── SEND INVITE ───────────────────────────────────────────────────────────────
+async function sendInvite(){
+  const gym   = document.getElementById('f-gym').value.trim();
+  const email = document.getElementById('f-email').value.trim().toLowerCase();
+  const err   = document.getElementById('inv-err');
+  err.textContent='';
 
-      if (!gym) { err.textContent = 'Enter the gym name.'; return; }
-      if (!email) { err.textContent = 'Enter the owner email.'; return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = 'Invalid email address.'; return; }
+  if(!gym)  { err.textContent='Enter the gym name.'; return; }
+  if(!email){ err.textContent='Enter the owner email.'; return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent='Invalid email address.'; return; }
 
-      const btn = document.getElementById('gbtn');
-      btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Generating…';
+  const btn=document.getElementById('gbtn');
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span>Generating…';
 
-      // Step 1: Create invite + coupon in DB
-      const { data, error } = await sb.rpc('send_gym_invite', { p_gym_name: gym, p_email: email });
+  // Step 1: Create invite + coupon in DB
+  const { data, error } = await sb.rpc('send_gym_invite', { p_gym_name: gym, p_email: email });
 
-      if (error) {
-        const msg = error.message.includes('ALREADY_INVITED') ? 'This gym has already been invited.'
-          : error.message.includes('NOT_A_MARKETER') ? 'Your account is not a marketer.'
-            : error.message;
-        err.textContent = msg;
-        btn.disabled = false; btn.textContent = 'Generate coupon & send invite email';
-        return;
-      }
+  if(error){
+    const msg = error.message.includes('ALREADY_INVITED') ? 'This gym has already been invited.'
+              : error.message.includes('NOT_A_MARKETER')  ? 'Your account is not a marketer.'
+              : error.message;
+    err.textContent = msg;
+    btn.disabled=false; btn.textContent='Generate coupon & send invite email';
+    return;
+  }
 
-      const coupon = data.coupon_code;
+  const coupon = data.coupon_code;
 
-      // Step 2: Send email via edge function
-      let emailSent = false;
-      try {
-        const { error: fnErr } = await sb.functions.invoke('send-invite-email', {
-          body: { gym_name: gym, email, coupon_code: coupon }
-        });
-        emailSent = !fnErr;
-      } catch (e) { emailSent = false; }
+  // Step 2: Send email via edge function
+  let emailSent = false;
+  try {
+    const { error: fnErr } = await sb.functions.invoke('send-invite-email', {
+      body: { gym_name: gym, email, coupon_code: coupon }
+    });
+    emailSent = !fnErr;
+  } catch(e){ emailSent = false; }
 
-      // Show success
-      lastCode = coupon;
-      document.getElementById('sk-code').textContent = coupon;
-      document.getElementById('sk-email-status').innerHTML = emailSent
-        ? `<div class="eok">✅ Invite email sent to <strong style="margin-left:4px">${email}</strong></div>`
-        : `<div class="efail">⚠️ Coupon created but email failed — share the code manually with ${email}</div>`;
-      document.getElementById('sk').classList.add('on');
-      document.getElementById('f-gym').value = '';
-      document.getElementById('f-email').value = '';
-      btn.disabled = false; btn.textContent = 'Generate coupon & send invite email';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Show success
+  lastCode = coupon;
+  document.getElementById('sk-code').textContent = coupon;
+  document.getElementById('sk-email-status').innerHTML = emailSent
+    ? `<div class="eok">✅ Invite email sent to <strong style="margin-left:4px">${email}</strong></div>`
+    : `<div class="efail">⚠️ Coupon created but email failed — share the code manually with ${email}</div>`;
+  document.getElementById('sk').classList.add('on');
+  document.getElementById('f-gym').value   = '';
+  document.getElementById('f-email').value = '';
+  btn.disabled=false; btn.textContent='Generate coupon & send invite email';
+  window.scrollTo({top:0,behavior:'smooth'});
 
-      // Refresh data
-      await refreshDash();
-    }
+  // Refresh data
+  await refreshDash();
+}
 
-    function copyCode() {
-      navigator.clipboard.writeText(lastCode).then(() => {
-        const b = document.getElementById('cpb');
-        b.textContent = 'Copied!'; setTimeout(() => b.textContent = 'Copy', 2000);
-      });
-    }
+function copyCode(){
+  navigator.clipboard.writeText(lastCode).then(()=>{
+    const b=document.getElementById('cpb');
+    b.textContent='Copied!'; setTimeout(()=>b.textContent='Copy',2000);
+  });
+}
 
-    // ── EARNINGS ──────────────────────────────────────────────────────────────────
-    function renderEarnings(earnings, stats) {
-      document.getElementById('et').textContent = inr(stats?.total_earned ?? 0);
-      document.getElementById('epend').textContent = inr(stats?.pending_payout ?? 0);
-      const el = document.getElementById('earn-body');
-      if (!earnings?.length) { el.innerHTML = `<div class="ee">Earnings appear here when your gyms subscribe to a paid plan.</div>`; return; }
-      el.innerHTML = earnings.map(e => `
+// ── EARNINGS ──────────────────────────────────────────────────────────────────
+function renderEarnings(earnings, stats){
+  document.getElementById('et').textContent    = inr(stats?.total_earned   ?? 0);
+  document.getElementById('epend').textContent = inr(stats?.pending_payout ?? 0);
+  const el=document.getElementById('earn-body');
+  if(!earnings?.length){ el.innerHTML=`<div class="ee">Earnings appear here when your gyms subscribe to a paid plan.</div>`; return; }
+  el.innerHTML=earnings.map(e=>`
     <div class="ei">
-      <div><div class="eg">${e.gym_name || '—'}</div><div class="er">${e.reason || ''}</div></div>
-      <div><div class="ea">+${inr(e.amount)}</div><div class="${e.paid_out ? 'epd' : 'ep'}">${e.paid_out ? '✓ Paid out' : '⏳ Pending'}</div></div>
+      <div><div class="eg">${e.gym_name||'—'}</div><div class="er">${e.reason||''}</div></div>
+      <div><div class="ea">+${inr(e.amount)}</div><div class="${e.paid_out?'epd':'ep'}">${e.paid_out?'✓ Paid out':'⏳ Pending'}</div></div>
     </div>`).join('');
-    }
+}
 
-    // ── NAVIGATION ────────────────────────────────────────────────────────────────
-    function go(p) {
-      document.querySelectorAll('.pg').forEach(el => el.classList.remove('on'));
-      document.querySelectorAll('.ni').forEach((el, i) => el.classList.toggle('active', ['overview', 'invite', 'earnings'][i] === p));
-      document.getElementById('pg-' + p).classList.add('on');
-    }
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function go(p){
+  document.querySelectorAll('.pg').forEach(el=>el.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach((el,i)=>el.classList.toggle('active',['overview','invite','earnings'][i]===p));
+  document.getElementById('pg-'+p).classList.add('on');
+}
 
-    // ── HELPERS ───────────────────────────────────────────────────────────────────
-    function badge(s) {
-      const m = { invited: ['bi', 'Invited'], onboarded: ['bo', 'Onboarded'], subscribed: ['bs', 'Subscribed'], dead: ['bd', 'Dead'] };
-      const [c, l] = m[s] || ['bd', s];
-      return `<span class="badge ${c}">${l}</span>`;
-    }
-    function fmt(ts) { return ts ? new Date(ts).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: '2-digit' }) : '—'; }
-    function inr(n) { return '₹' + (Number(n) || 0).toLocaleString('en-IN'); }
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function badge(s){
+  const m={invited:['bi','Invited'],onboarded:['bo','Onboarded'],subscribed:['bs','Subscribed'],dead:['bd','Dead']};
+  const [c,l]=m[s]||['bd',s];
+  return `<span class="badge ${c}">${l}</span>`;
+}
+function fmt(ts){ return ts?new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'}):'—'; }
+function inr(n){ return '₹'+(Number(n)||0).toLocaleString('en-IN'); }
 
-    // ── BOOT ──────────────────────────────────────────────────────────────────────
-    (async () => {
-      const { data: { session } } = await sb.auth.getSession();
-      if (session?.user) {
-        await initApp(session.user);
-      }
-    })();
-  </script>
+// ── BOOT ──────────────────────────────────────────────────────────────────────
+(async()=>{
+  const { data:{ session } } = await sb.auth.getSession();
+  if(session?.user){
+    await initApp(session.user);
+  }
+})();
+</script>
 </body>
-
 </html>
