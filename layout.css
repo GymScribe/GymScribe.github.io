@@ -1,0 +1,56 @@
+/* ================================================================
+   GYMNOTE — Layout  (Nav + Footer)
+   ================================================================ */
+
+/* ── Navigation ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 6vw;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background .3s, backdrop-filter .3s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(8, 8, 8, .92);
+  backdrop-filter: blur(20px);
+  border-bottom-color: var(--b1);
+}
+
+.nav-logo  { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-lmark {
+  width: 32px; height: 32px;
+  background: var(--acc);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; color: #080808; flex-shrink: 0; letter-spacing: -.5px;
+}
+.nav-lname {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700; color: var(--tx); letter-spacing: -.3px;
+}
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+.nav-links a:hover { color: var(--tx); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+
+/* ── Footer ── */
+footer {
+  padding: 40px 6vw;
+  border-top: 1px solid var(--b1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo  { display: flex; align-items: center; gap: 8px; }
+.footer-text  { font-size: 13px; color: var(--muted); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--tx); }

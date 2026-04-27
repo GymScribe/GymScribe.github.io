@@ -1,0 +1,30 @@
+/* ================================================================
+   GYMNOTE — Design Tokens / CSS Custom Properties
+   ================================================================ */
+
+:root {
+  /* Backgrounds */
+  --bg:  #080808;
+  --s1:  #111111;
+  --s2:  #181818;
+
+  /* Borders */
+  --b1:  #222222;
+  --b2:  #2e2e2e;
+
+  /* Text */
+  --tx:     #f0f0f0;
+  --muted:  #666;
+
+  /* Accent (lime-green) */
+  --acc:    #c8f135;
+  --acc2:   #a8d420;
+  --acc-bg: rgba(200, 241, 53, .07);
+  --acc-br: rgba(200, 241, 53, .2);
+
+  /* Status */
+  --danger: #ff4d4d;
+
+  /* Global radius */
+  --r: 14px;
+}

@@ -1,0 +1,70 @@
+/* ================================================================
+   GYMNOTE — Reset & Base Styles
+   ================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--tx);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--b2); border-radius: 2px; }
+
+/* ── Headings ── */
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: .95;
+  letter-spacing: -.5px;
+  color: var(--tx);
+  margin-bottom: 8px;
+  animation: fadeUp .6s .1s ease both;
+}
+h1 span { color: var(--acc); }
+
+/* ── Shared Section Utilities ── */
+section { padding: 100px 6vw; }
+
+.section-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--acc);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  color: var(--tx);
+  margin-bottom: 16px;
+  letter-spacing: -.3px;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: #888;
+  line-height: 1.7;
+  max-width: 540px;
+}

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>GymScribe — Run a Premium Gym. Stop Losing Money.</title>
+  <meta name="description"
+    content="The ultimate gym management app for Indian gym owners — track members, send one-click WhatsApp invoices & reminders, custom branded billing. 40-day free trial.">
+  <meta name="keywords"
+    content="gym management software India, gym member tracking app, WhatsApp gym invoices, gym billing software, GymScribe">
+  <meta name="author" content="GymScribe">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GymScribe — Run a Premium Gym. Stop Losing Money.">
+  <meta property="og:description"
+    content="Track members, send one-click WhatsApp invoices & reminders. Built for Indian gym owners.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets — order matters -->
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="animations.css">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="sections.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <div class="nav-lmark">GS</div>
+      <div class="nav-lname">GymScribe</div>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn-ghost" onclick="openModal(event)">Marketer Login</a>
+      <a href="#contact" class="btn-acc">Get Started Free</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════ HERO ══════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Now live for Indian gym owners
+      </div>
+      <h1>Run a Premium<br>Gym. <span>Stop</span><br>Losing Money.</h1>
+      <p class="hero-sub">The ultimate gym management tool — track every member, send branded invoices &amp; WhatsApp
+        reminders with a single tap. Save hours every week.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-hero">
+          Get Started Free
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+        <a href="#features" class="btn-hero-ghost">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">40</div>
+          <div class="hero-stat-lbl">Days Free Trial</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">10+</div>
+          <div class="hero-stat-lbl">Hours Saved Weekly</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">1-tap</div>
+          <div class="hero-stat-lbl">WhatsApp Invoices</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">0</div>
+          <div class="hero-stat-lbl">Paper Required</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone mockup SVG -->
+    <svg class="hero-img" viewBox="0 0 320 580" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="300" height="560" rx="36" fill="#111" stroke="#2a2a2a" stroke-width="1.5" />
+      <rect x="22" y="22" width="276" height="536" rx="28" fill="#161616" />
+      <rect x="100" y="30" width="120" height="18" rx="9" fill="#0c0c0c" />
+      <rect x="36" y="64" width="130" height="14" rx="4" fill="#c8f135" opacity=".9" />
+      <rect x="244" y="64" width="36" height="14" rx="4" fill="#222" />
+      <rect x="36" y="92" width="120" height="72" rx="10" fill="#1e1e1e" />
+      <text x="50" y="118" font-family="Arial" font-size="10" fill="#666">TOTAL MEMBERS</text>
+      <text x="50" y="144" font-family="Arial" font-size="26" font-weight="800" fill="#c8f135">247</text>
+      <rect x="164" y="92" width="116" height="72" rx="10" fill="#1e1e1e" />
+      <text x="178" y="118" font-family="Arial" font-size="10" fill="#666">THIS MONTH</text>
+      <text x="178" y="144" font-family="Arial" font-size="20" font-weight="800" fill="#f0f0f0">₹48,200</text>
+      <rect x="36" y="178" width="248" height="1" fill="#2a2a2a" />
+      <text x="36" y="202" font-family="Arial" font-size="11" fill="#666" font-weight="600">MEMBERS</text>
+      <!-- Row 1 — Paid -->
+      <rect x="36" y="212" width="248" height="48" rx="8" fill="#1a1a1a" />
+      <circle cx="60" cy="236" r="14" fill="#c8f135" opacity=".15" />
+      <text x="52" y="239" font-family="Arial" font-size="10" font-weight="700" fill="#c8f135">RK</text>
+      <text x="82" y="229" font-family="Arial" font-size="12.5" font-weight="600" fill="#f0f0f0">Rajesh K.</text>
+      <text x="82" y="245" font-family="Arial" font-size="10" fill="#666">Expires 15 Jun</text>
+      <rect x="234" y="226" width="40" height="18" rx="9" fill="rgba(76,175,125,.15)" />
+      <text x="242" y="239" font-family="Arial" font-size="9" font-weight="700" fill="#4caf7d">PAID</text>
+      <!-- Row 2 — Overdue -->
+      <rect x="36" y="268" width="248" height="48" rx="8" fill="#1a1a1a" />
+      <circle cx="60" cy="292" r="14" fill="rgba(255,77,77,.15)" />
+      <text x="53" y="295" font-family="Arial" font-size="10" font-weight="700" fill="#ff4d4d">PS</text>
+      <text x="82" y="285" font-family="Arial" font-size="12.5" font-weight="600" fill="#f0f0f0">Priya S.</text>
+      <text x="82" y="301" font-family="Arial" font-size="10" fill="#ff4d4d">Due today</text>
+      <rect x="220" y="282" width="54" height="18" rx="9" fill="rgba(255,77,77,.15)" />
+      <text x="226" y="295" font-family="Arial" font-size="9" font-weight="700" fill="#ff4d4d">OVERDUE</text>
+      <!-- Row 3 — Expiring -->
+      <rect x="36" y="324" width="248" height="48" rx="8" fill="#1a1a1a" />
+      <circle cx="60" cy="348" r="14" fill="rgba(245,166,35,.15)" />
+      <text x="52" y="351" font-family="Arial" font-size="10" font-weight="700" fill="#f5a623">AM</text>
+      <text x="82" y="341" font-family="Arial" font-size="12.5" font-weight="600" fill="#f0f0f0">Arun M.</text>
+      <text x="82" y="357" font-family="Arial" font-size="10" fill="#f5a623">Expires in 3 days</text>
+      <rect x="222" y="338" width="52" height="18" rx="9" fill="rgba(245,166,35,.15)" />
+      <text x="227" y="351" font-family="Arial" font-size="9" font-weight="700" fill="#f5a623">EXPIRING</text>
+      <!-- Send Invoice button -->
+      <rect x="36" y="390" width="116" height="36" rx="8" fill="#c8f135" />
+      <text x="58" y="411" font-family="Arial" font-size="11" font-weight="800" fill="#080808">📄 Invoice</text>
+      <!-- Send Reminder button -->
+      <rect x="162" y="390" width="122" height="36" rx="8" fill="#1e1e1e" stroke="#2a2a2a" stroke-width="1" />
+      <text x="177" y="411" font-family="Arial" font-size="11" font-weight="700" fill="#c8f135">💬 Remind</text>
+      <!-- Bottom nav -->
+      <rect x="36" y="520" width="248" height="1" fill="#2a2a2a" />
+      <circle cx="100" cy="546" r="14" fill="#c8f135" opacity=".1" />
+      <text x="92" y="551" font-family="Arial" font-size="18" fill="#c8f135">⊞</text>
+      <text x="146" y="551" font-family="Arial" font-size="18" fill="#444">◎</text>
+      <text x="193" y="551" font-family="Arial" font-size="18" fill="#444">◈</text>
+    </svg>
+  </section>
+
+  <!-- ═══════════════════════════════ TICKER ════════════════════════════ -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item">MEMBER TRACKING <span>✦</span></div>
+      <div class="ticker-item">ONE-CLICK INVOICES <span>✦</span></div>
+      <div class="ticker-item">WHATSAPP REMINDERS <span>✦</span></div>
+      <div class="ticker-item">REVENUE DASHBOARD <span>✦</span></div>
+      <div class="ticker-item">CUSTOM BRANDED INVOICES <span>✦</span></div>
+      <div class="ticker-item">STAFF MANAGEMENT <span>✦</span></div>
+      <div class="ticker-item">BUILT FOR INDIA <span>✦</span></div>
+      <div class="ticker-item">MEMBER TRACKING <span>✦</span></div>
+      <div class="ticker-item">ONE-CLICK INVOICES <span>✦</span></div>
+      <div class="ticker-item">WHATSAPP REMINDERS <span>✦</span></div>
+      <div class="ticker-item">REVENUE DASHBOARD <span>✦</span></div>
+      <div class="ticker-item">CUSTOM BRANDED INVOICES <span>✦</span></div>
+      <div class="ticker-item">STAFF MANAGEMENT <span>✦</span></div>
+      <div class="ticker-item">BUILT FOR INDIA <span>✦</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ PROBLEMS ══════════════════════════════ -->
+  <section class="problems reveal" id="why">
+    <div class="section-tag">The Problem</div>
+    <div class="section-title">Sound Familiar?</div>
+    <div class="section-sub">In a busy gym, things get missed. Revenue leaks every single day.</div>
+    <div class="problems-grid">
+      <div class="problem-card">
+        <div class="problem-icon">📋</div>
+        <div class="problem-title">Paper Notebooks Get Lost</div>
+        <div class="problem-text">One flood, one fire, one careless moment — and <span class="problem-highlight">years
+            of member data</span> is gone forever. Your entire business in a ₹20 notebook.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">💸</div>
+        <div class="problem-title">Members "Forget" to Pay</div>
+        <div class="problem-text">Without timely reminders, <span class="problem-highlight">30–40% of renewals slip
+            through</span>. That's thousands of rupees leaving your gym every month — silently.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">⏰</div>
+        <div class="problem-title">Hours Wasted Daily</div>
+        <div class="problem-text">Flipping through pages, calling members, writing receipts by hand. <span
+            class="problem-highlight">2–3 hours every day</span> that should be spent on your gym floor.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FEATURES ══════════════════════════════ -->
+  <section id="features">
+    <div class="section-tag reveal">What You Get</div>
+    <div class="section-title reveal">Everything Your Gym<br>Needs. Nothing It Doesn't.</div>
+    <div class="features-grid">
+
+      <div class="feat-card reveal">
+        <div class="feat-icon">⚡</div>
+        <div class="feat-title">Never Miss a Payment</div>
+        <div class="feat-text">Instantly see who is Paid, Pending, and Expired. Our smart dashboard highlights dues in
+          red — giving you total payment visibility and stopping revenue leakage permanently.</div>
+      </div>
+
+      <div class="feat-card reveal">
+        <div class="feat-icon">📄</div>
+        <div class="feat-title">Custom Branded Invoices</div>
+        <div class="feat-text">Generate professional invoices with <strong style="color:var(--tx)">your gym's logo,
+            name, address &amp; contact</strong>. Every invoice shows the member's plan, amount, validity dates, and
+          payment details — all in one tap.</div>
+      </div>
+
+      <div class="feat-card reveal">
+        <div class="feat-icon">💬</div>
+        <div class="feat-title">One-Click WhatsApp Reminders</div>
+        <div class="feat-text">See all members due for renewal in one view. Click the <strong
+            style="color:var(--tx)">Send Reminder</strong> button next to any member and GymScribe opens WhatsApp with a
+          ready-to-send message — you just tap Send. Simple as that.</div>
+      </div>
+
+      <div class="feat-card reveal">
+        <div class="feat-icon">📱</div>
+        <div class="feat-title">Your Gym, In Your Pocket</div>
+        <div class="feat-text">Whether you're at the gym or at home, you have total control. Monitor daily collections,
+          member status, and renewals from anywhere — in real time on your phone.</div>
+      </div>
+
+      <div class="feat-card large reveal">
+        <div>
+          <div class="feat-icon">👥</div>
+          <div class="feat-title">Complete Member Control + Invoice Sending</div>
+          <div class="feat-text" style="margin-bottom:20px">Search any member instantly. See their full plan details,
+            payment history &amp; renewal date. Then with one tap — send their invoice or a renewal reminder directly on
+            WhatsApp. No copy-pasting, no manual typing. GymScribe pre-fills everything.</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span
+              style="padding:6px 14px;background:var(--acc-bg);border:1px solid var(--acc-br);border-radius:20px;font-size:12px;color:var(--acc)">Instant
+              Search</span>
+            <span
+              style="padding:6px 14px;background:var(--acc-bg);border:1px solid var(--acc-br);border-radius:20px;font-size:12px;color:var(--acc)">Full
+              Payment History</span>
+            <span
+              style="padding:6px 14px;background:var(--acc-bg);border:1px solid var(--acc-br);border-radius:20px;font-size:12px;color:var(--acc)">Custom
+              Invoices</span>
+            <span
+              style="padding:6px 14px;background:var(--acc-bg);border:1px solid var(--acc-br);border-radius:20px;font-size:12px;color:var(--acc)">1-Tap
+              WhatsApp</span>
+          </div>
+        </div>
+        <div class="feat-visual">
+          <div style="width:100%;padding:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+              <span style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px">Live
+                Dashboard</span>
+              <span style="font-size:11px;color:var(--acc)">● Live</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+              <div
+                style="background:rgba(76,175,125,.1);border:1px solid rgba(76,175,125,.2);border-radius:8px;padding:12px;text-align:center">
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#4caf7d;line-height:1">186</div>
+                <div style="font-size:10px;color:#666;margin-top:3px">PAID</div>
+              </div>
+              <div
+                style="background:rgba(255,77,77,.1);border:1px solid rgba(255,77,77,.2);border-radius:8px;padding:12px;text-align:center">
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#ff4d4d;line-height:1">34</div>
+                <div style="font-size:10px;color:#666;margin-top:3px">OVERDUE</div>
+              </div>
+              <div
+                style="background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:12px;text-align:center">
+                <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#f5a623;line-height:1">27</div>
+                <div style="font-size:10px;color:#666;margin-top:3px">EXPIRING</div>
+              </div>
+            </div>
+            <div
+              style="background:var(--s1);border-radius:8px;padding:10px 12px;margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:12px;color:var(--muted)">Today's Collection</span>
+              <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--acc)">₹12,400</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ MEMBER EXPERIENCE ══════════════════════════ -->
+  <section class="member-section reveal" id="members">
+    <div class="section-tag">Member Experience</div>
+    <div class="section-title">The Premium Experience<br>Your Members Deserve</div>
+    <div class="section-sub">When your gym uses GymScribe, your members feel the difference from day one.</div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-emoji">🧾</div>
+        <div class="member-title">Branded Invoice on WhatsApp</div>
+        <div class="member-text">Members receive a professional invoice with your gym's logo, plan details &amp; payment
+          info — instantly on WhatsApp when you tap Send Invoice.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-emoji">🔔</div>
+        <div class="member-title">Timely Renewal Reminders</div>
+        <div class="member-text">You see who's expiring, click Remind, and a personalised WhatsApp message goes to them.
+          They feel taken care of. You look professional.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-emoji">🏆</div>
+        <div class="member-title">Modern &amp; Professional</div>
+        <div class="member-text">They see a tech-forward gym that values their time. Branded invoices and clean
+          communication make you stand out from every other gym in your area.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ INDIA SECTION ══════════════════════════ -->
+  <section id="india">
+    <div class="india-grid">
+      <div class="reveal">
+        <div class="section-tag">Built for India</div>
+        <div class="section-title">Made for the Indian<br>Gym Owner</div>
+        <div class="section-sub" style="margin-bottom:36px">We know the hustle of running a gym in India. GymScribe is
+          built around your reality.</div>
+        <div class="india-list">
+          <div class="india-item">
+            <div class="india-check">✓</div>
+            <div>
+              <div class="india-item-title">Simple as WhatsApp</div>
+              <div class="india-item-text">No complex training needed. If you can use WhatsApp, you can use GymScribe
+                from day one.</div>
+            </div>
+          </div>
+          <div class="india-item">
+            <div class="india-check">✓</div>
+            <div>
+              <div class="india-item-title">Fast &amp; Lightweight</div>
+              <div class="india-item-text">Smooth, lag-free experience on any Android or iOS device — even on 4G
+                networks.</div>
+            </div>
+          </div>
+          <div class="india-item">
+            <div class="india-check">✓</div>
+            <div>
+              <div class="india-item-title">Scalable with You</div>
+              <div class="india-item-text">50 members or 5,000 across multiple branches — GymScribe grows with your
+                business.</div>
+            </div>
+          </div>
+          <div class="india-item">
+            <div class="india-check">✓</div>
+            <div>
+              <div class="india-item-title">UPI &amp; Cash Friendly</div>
+              <div class="india-item-text">Track payments however members pay — cash, UPI, bank transfer. Every rupee
+                accounted for.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="india-visual reveal">
+        <div class="india-visual-bg"></div>
+        <div class="stat-display">
+          <div class="stat-box">
+            <div class="stat-box-num">₹0</div>
+            <div class="stat-box-lbl">Setup cost</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-num">40</div>
+            <div class="stat-box-lbl">Days free trial</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-num">10+</div>
+            <div class="stat-box-lbl">Hours saved/week</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-num">∞</div>
+            <div class="stat-box-lbl">Members supported</div>
+          </div>
+        </div>
+        <div style="margin-top:20px;background:var(--bg);border:1px solid var(--b1);border-radius:10px;padding:20px">
+          <div
+            style="font-size:12px;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.6px">
+            Revenue Growth</div>
+          <div style="display:flex;align-items:flex-end;gap:6px;height:60px">
+            <div style="flex:1;background:var(--acc-bg);border-radius:4px 4px 0 0;height:40%"></div>
+            <div style="flex:1;background:var(--acc-bg);border-radius:4px 4px 0 0;height:55%"></div>
+            <div style="flex:1;background:var(--acc-bg);border-radius:4px 4px 0 0;height:45%"></div>
+            <div style="flex:1;background:var(--acc-bg);border-radius:4px 4px 0 0;height:70%"></div>
+            <div style="flex:1;background:var(--acc-bg);border-radius:4px 4px 0 0;height:65%"></div>
+            <div style="flex:1;background:rgba(200,241,53,.3);border-radius:4px 4px 0 0;height:85%"></div>
+            <div style="flex:1;background:var(--acc);border-radius:4px 4px 0 0;height:100%"></div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px">Average 40% revenue increase after 90 days</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PRICING ═══════════════════════════════ -->
+  <section id="pricing" style="background:var(--s1)">
+    <div style="text-align:center" class="reveal">
+      <div class="section-tag">Pricing</div>
+      <div class="section-title">Transparent. Simple. Fair.</div>
+      <div class="section-sub" style="margin:0 auto">Start free for 40 days. No credit card. No commitment. Cancel
+        anytime.</div>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Quarterly -->
+      <div class="price-card reveal">
+        <div class="price-name">Quarterly</div>
+        <div class="price-desc">Get started and see the difference</div>
+        <div class="price-amount"><span>₹</span>1,199</div>
+        <div class="price-period">per 3 months · just ₹400/month</div>
+        <div class="price-divider"></div>
+        <div class="price-features">
+          <div class="pf"><span class="pf-check">✓</span>Unlimited members</div>
+          <div class="pf"><span class="pf-check">✓</span>Payment tracking &amp; dashboard</div>
+          <div class="pf"><span class="pf-check">✓</span>One-click WhatsApp reminders</div>
+          <div class="pf"><span class="pf-check">✓</span>Custom branded invoices</div>
+          <div class="pf"><span class="pf-check">✓</span>Staff accounts &amp; analytics</div>
+        </div>
+        <button class="price-btn price-btn-ghost"
+          onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Free Trial</button>
+      </div>
+
+      <!-- 6 Months — Popular -->
+      <div class="price-card popular reveal">
+        <div class="popular-tag">⭐ Most Popular</div>
+        <div class="price-name">6 Months</div>
+        <div class="price-desc">Best value — run your gym like a pro</div>
+        <div class="price-amount"><span>₹</span>2,099</div>
+        <div class="price-period">per 6 months · save ₹299 vs quarterly</div>
+        <div class="price-divider"></div>
+        <div class="price-features">
+          <div class="pf"><span class="pf-check">✓</span>Unlimited members</div>
+          <div class="pf"><span class="pf-check">✓</span>Payment tracking &amp; dashboard</div>
+          <div class="pf"><span class="pf-check">✓</span>One-click WhatsApp reminders</div>
+          <div class="pf"><span class="pf-check">✓</span>Custom branded invoices</div>
+          <div class="pf"><span class="pf-check">✓</span>Staff accounts &amp; analytics</div>
+        </div>
+        <button class="price-btn price-btn-acc"
+          onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Free Trial</button>
+      </div>
+
+      <!-- Yearly -->
+      <div class="price-card reveal">
+        <div class="price-name">Yearly</div>
+        <div class="price-desc">Full power for a whole year — nothing held back</div>
+        <div class="price-amount"><span>₹</span>4,000</div>
+        <div class="price-period">per year · 2 months free vs quarterly</div>
+        <div class="price-divider"></div>
+        <div class="price-features">
+          <div class="pf"><span class="pf-check">✓</span>Unlimited members</div>
+          <div class="pf"><span class="pf-check">✓</span>Payment tracking &amp; dashboard</div>
+          <div class="pf"><span class="pf-check">✓</span>One-click WhatsApp reminders</div>
+          <div class="pf"><span class="pf-check">✓</span>Custom branded invoices</div>
+          <div class="pf"><span class="pf-check">✓</span>Staff accounts &amp; analytics</div>
+        </div>
+        <button class="price-btn price-btn-ghost"
+          onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Free Trial</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ TESTIMONIALS ══════════════════════════ -->
+  <section class="testi-section" id="testimonials">
+    <div style="text-align:center" class="reveal">
+      <div class="section-tag">Reviews</div>
+      <div class="section-title">Gym Owners Love It</div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"I was losing almost ₹15,000 every month from members who never renewed on time. With
+          GymScribe I just click Remind and the WhatsApp message goes. Collections are up massively."</div>
+        <div class="testi-author">
+          <div class="testi-av">VR</div>
+          <div>
+            <div class="testi-name">Vinod Reddy</div>
+            <div class="testi-gym">Power Zone Gym, Hyderabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"My members get a proper branded invoice on WhatsApp the moment they pay. Everyone
+          thinks I hired an accounts team. It's just GymScribe — one tap and done."</div>
+        <div class="testi-author">
+          <div class="testi-av">SK</div>
+          <div>
+            <div class="testi-name">Suresh Kumar</div>
+            <div class="testi-gym">Iron Body Fitness, Chennai</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"In my 40-day trial I recovered enough missed payments to pay for the whole year. The
+          invoice feature with my gym logo is incredible — members love it."</div>
+        <div class="testi-author">
+          <div class="testi-av">AM</div>
+          <div>
+            <div class="testi-name">Arjun Menon</div>
+            <div class="testi-gym">Elite Fitness Club, Bangalore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CTA ═══════════════════════════════ -->
+  <section class="cta-section reveal">
+    <div class="cta-bg"></div>
+    <div class="cta-title">Stop Tracking on Paper.<br><span>Start Growing</span><br>with GymScribe.</div>
+    <div class="cta-sub">Join gym owners across India who are saving time, recovering lost revenue, and sending
+      professional invoices with a single tap.</div>
+    <div class="cta-btns">
+      <a href="#contact" class="btn-hero">
+        Get Started Free — 40 Days
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+      <a href="https://wa.me/919502713510?text=Hi!%20I%27m%20interested%20in%20GymScribe.%20Please%20call%20me."
+        target="_blank" rel="noopener" class="btn-hero-ghost">📞 Call Us Now</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CONTACT ═══════════════════════════════ -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <div class="section-tag">Contact</div>
+        <div class="contact-title">Let's Get Your<br>Gym on GymScribe</div>
+        <div class="contact-sub">Have questions? Want a demo? Reach out directly — we respond within 2 hours.</div>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-ic">📞</div>
+            <div>
+              <div class="contact-lbl">Call / WhatsApp</div>
+              <div class="contact-val"><a
+                  href="https://wa.me/919502713510?text=Hi!%20I%27m%20interested%20in%20GymScribe.%20Please%20send%20me%20more%20details."
+                  target="_blank" rel="noopener">+91 95027 13510</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-ic">✉️</div>
+            <div>
+              <div class="contact-lbl">Email</div>
+              <div class="contact-val"><a
+                  href="mailto:gymscribee@gmail.com?subject=Interested%20in%20GymScribe&body=Hi%2C%20I%27m%20interested%20in%20GymScribe.%20Please%20send%20me%20more%20details.">gymscribee@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-ic">⏰</div>
+            <div>
+              <div class="contact-lbl">Response Time</div>
+              <div class="contact-val">Within 2 hours</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="https://wa.me/919502713510?text=Hi!%20I%27m%20interested%20in%20GymScribe%20for%20my%20gym.%20Please%20send%20me%20more%20details."
+            target="_blank" rel="noopener"
+            style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:#25D366;border-radius:8px;color:#fff;font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none;transition:opacity .15s"
+            onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Chat on WhatsApp
+          </a>
+          <a href="mailto:gymscribee@gmail.com?subject=Interested%20in%20GymScribe&body=Hi%2C%20I%27m%20interested%20in%20GymScribe.%20Please%20send%20me%20more%20details."
+            style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:1px solid var(--b2);border-radius:8px;color:var(--muted);font-family:'Syne',sans-serif;font-size:13.5px;font-weight:600;text-decoration:none;transition:all .15s"
+            onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--muted)'">
+            Send Email
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form → opens WhatsApp with predefined message -->
+      <div class="contact-form reveal">
+        <div class="cf-title">Get a Free Demo</div>
+        <div class="cf-row">
+          <div><label class="cf-label">Your name</label><input type="text" class="cf-input" id="cf-name"
+              placeholder="Rajesh Kumar"></div>
+          <div><label class="cf-label">Gym name</label><input type="text" class="cf-input" id="cf-gym"
+              placeholder="Iron Fit Gym"></div>
+        </div>
+        <div class="cf-field"><label class="cf-label">Phone / WhatsApp *</label><input type="tel" class="cf-input"
+            id="cf-phone" placeholder="+91 98765 43210"></div>
+        <div class="cf-field"><label class="cf-label">Message (optional)</label><textarea class="cf-input" id="cf-msg"
+            placeholder="I am interested in GymScribe. Please send me more details."></textarea></div>
+        <button class="cf-btn" onclick="submitForm(this)">
+          <span>Send via WhatsApp →</span>
+        </button>
+        <div id="cf-success"
+          style="display:none;margin-top:12px;padding:12px 14px;background:rgba(76,175,125,.08);border:1px solid rgba(76,175,125,.2);border-radius:8px;font-size:13px;color:#4caf7d">
+          ✅ Opening WhatsApp with your message — we'll reply within 2 hours!
+        </div>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.6">
+          Clicking the button opens WhatsApp with a pre-filled message including your details. We'll reply within 2
+          hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FOOTER ════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">
+      <div class="nav-lmark" style="width:26px;height:26px;font-size:11px">GS</div>
+      <span style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--tx)">GymScribe</span>
+    </div>
+    <div class="footer-text">
+      © 2026 GymScribe. Built for Indian gym owners. &nbsp;|&nbsp;
+      <a href="https://wa.me/919502713510" target="_blank" rel="noopener"
+        style="color:var(--muted);text-decoration:none">+91 95027 13510</a>
+      &nbsp;|&nbsp;
+      <a href="mailto:gymscribee@gmail.com?subject=Interested%20in%20GymScribe&body=Hi%2C%20I%27m%20interested%20in%20GymScribe.%20Please%20send%20me%20more%20details."
+        style="color:var(--muted);text-decoration:none">gymscribee@gmail.com</a>
+    </div>
+    <div class="footer-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a href="#" onclick="openModal(event)">Marketer Login</a>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════ MARKETER MODAL ════════════════════════════ -->
+  <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-logo">
+        <div class="nav-lmark" style="width:28px;height:28px;font-size:11px">GS</div>
+        <span style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700">GymScribe</span>
+      </div>
+      <div class="modal-title">Marketer Portal</div>
+      <div class="modal-sub">Sign in to your marketer account to manage invites and track earnings.</div>
+      <div class="m-field"><label class="m-label">Email</label><input type="email" class="m-input" id="m-email"
+          placeholder="you@gymscribe.app"></div>
+      <div class="m-field"><label class="m-label">Password</label><input type="password" class="m-input" id="m-pass"
+          placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="m-btn" onclick="doLogin()" id="m-btn">Sign in to Dashboard</button>
+      <div class="m-err" id="m-err"></div>
+      <div class="m-note">Only authorised GymScribe marketers can access this portal.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ SCRIPTS ═══════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="config.js"></script>
+  <script src="ui.js"></script>
+  <script src="auth.js"></script>
+  <script src="main.js"></script>
+
+</body>
+
+</html>

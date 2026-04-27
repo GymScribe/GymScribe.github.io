@@ -1,0 +1,138 @@
+/* ================================================================
+   GYMSCRIBE — Responsive / Media Queries
+   ================================================================ */
+
+/* ── Tablet (≤ 900px) ── */
+@media (max-width: 900px) {
+
+  /* Hide hero phone mockup */
+  .hero-img { display: none; }
+
+  /* Stack feature grids */
+  .features-grid { grid-template-columns: 1fr; }
+  .feat-card.large {
+    grid-column: span 1;
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack all major grids */
+  .problems-grid,
+  .pricing-grid,
+  .testi-grid,
+  .member-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .india-grid,
+  .contact-inner,
+  .cf-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tighten hero stats */
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+
+  /* Hide nav links — space too tight */
+  nav .nav-links { display: none; }
+
+  /* Reduce section padding */
+  section            { padding: 70px 5vw; }
+  .contact-section   { padding: 60px 5vw; }
+  .cta-section       { padding: 80px 5vw; }
+}
+
+/* ── Mobile (≤ 600px) ── */
+@media (max-width: 600px) {
+
+  /* Typography — shrink oversized headings */
+  h1 {
+    font-size: clamp(38px, 11vw, 56px) !important;
+    line-height: 1 !important;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 8vw, 44px) !important;
+  }
+
+  .cta-title {
+    font-size: clamp(34px, 10vw, 58px) !important;
+  }
+
+  /* Tighten padding */
+  section          { padding: 56px 5vw; }
+  .hero            { padding: 88px 5vw 48px; }
+  .contact-section { padding: 56px 5vw; }
+  .cta-section     { padding: 64px 5vw; }
+  nav              { padding: 0 5vw; }
+
+  /* Hero stats — 2-col on small screens */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 28px;
+  }
+  .hero-stat-num { font-size: 32px; }
+  .hero-stat-lbl { font-size: 11px; }
+
+  /* Hero sub */
+  .hero-sub { font-size: 15px !important; margin-bottom: 28px; }
+
+  /* Buttons stack */
+  .hero-btns, .cta-btns {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cta-btns { align-items: center; }
+
+  .btn-hero, .btn-hero-ghost {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Ticker — smaller text */
+  .ticker-item { font-size: 14px; gap: 14px; }
+  .ticker-inner { gap: 40px; }
+
+  /* Problem cards */
+  .problem-card { padding: 24px 20px; }
+  .problem-title { font-size: 16px; }
+
+  /* Feature cards */
+  .feat-card        { padding: 24px 20px; }
+  .feat-title       { font-size: 17px; }
+  .feat-card.large  { padding: 24px 20px; }
+
+  /* Pricing cards */
+  .price-card   { padding: 24px 20px; }
+  .price-amount { font-size: 44px; }
+
+  /* Testimonial cards */
+  .testi-card { padding: 20px 18px; }
+
+  /* Contact form */
+  .contact-form { padding: 22px 18px; }
+  .cf-row { grid-template-columns: 1fr; margin-bottom: 0; }
+
+  /* Footer — stack */
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 32px 5vw;
+  }
+  .footer-links { flex-wrap: wrap; gap: 14px; }
+  .footer-text  { font-size: 12px; line-height: 1.7; }
+
+  /* Hide marketer login button in nav CTA (saves space) */
+  nav .btn-ghost { display: none; }
+
+  /* India stats grid */
+  .stat-display { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-box-num { font-size: 28px; }
+
+  /* Modal */
+  .modal { padding: 28px 20px; }
+}
